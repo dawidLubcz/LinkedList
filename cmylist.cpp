@@ -1,20 +1,13 @@
 #include"cmylist.h"
 #include <iostream>
 
-// initalize static member
 template<typename T>
 uint64_t CMyList<T>::iItemsCounter = 0;
 
-//-----------------------------------------------
-// constructor
 template<typename T>
 CMyList<T>::CMyList():m_pFirstItem(0),m_pLastItem(0)
-{
+{}
 
-}
-
-//-----------------------------------------------
-// constructor
 template<typename T>
 CMyList<T>::Node::Node(T a_iValue)
 {
@@ -22,8 +15,6 @@ CMyList<T>::Node::Node(T a_iValue)
     pNextItem = 0;
 }
 
-//-----------------------------------------------
-// copy constructor
 template<typename T>
 CMyList<T>::Node::Node(Node& a_item)
 {
@@ -31,8 +22,6 @@ CMyList<T>::Node::Node(Node& a_item)
     pNextItem = a_item.pNextItem;
 }
 
-//-----------------------------------------------
-// addFirst
 template<typename T>
 bool_t CMyList<T>::addFirst(T a_oItem)
 {
@@ -41,16 +30,16 @@ bool_t CMyList<T>::addFirst(T a_oItem)
     // create poiter to new item
     Node* newItem = new Node(a_oItem);
 
-    //check if list is empty
+    // check if list is empty
     if(0 == iItemsCounter)
     {
-        //if we adding first element, first and last item are the same
+        // if we adding first element, first and last item are the same
         m_pFirstItem = newItem;
         m_pLastItem  = newItem;
     }
     else
     {
-        //store addres to first element in newItem.next and set new Item as first element
+        // store addres to first element in newItem.next and set new Item as first element
         newItem->pNextItem = m_pFirstItem;
         m_pFirstItem = newItem;
     }
@@ -65,16 +54,12 @@ bool_t CMyList<T>::addFirst(T a_oItem)
     return fResult;
 }
 
-//-----------------------------------------------
-// size
 template<typename T>
 uint64_t CMyList<T>::size()
 {
     return iItemsCounter;
 }
 
-//-----------------------------------------------
-// remove
 template<typename T>
 bool_t CMyList<T>::remove(T a_oItem)
 {
@@ -101,7 +86,7 @@ bool_t CMyList<T>::remove(T a_oItem)
                 }
 
                 //last item
-                if((false == isFirst))//if one element was in the list is need to check if poiter was deleted
+                if((false == isFirst)) // if one element was in the list is need to check if poiter was deleted
                 {
                     if(0 == temp->pNextItem)
                     {
@@ -111,7 +96,6 @@ bool_t CMyList<T>::remove(T a_oItem)
                     }
                 }
 
-                //else
                 if(false == isFirst && false == isLast)
                 {
                     Node* toRem = temp;
@@ -142,8 +126,6 @@ bool_t CMyList<T>::remove(T a_oItem)
     return fResult;
 }
 
-//-----------------------------------------------
-// removeLast
 template<typename T>
 bool_t CMyList<T>::removeLast()
 {
@@ -175,8 +157,6 @@ bool_t CMyList<T>::removeLast()
     return fResult;
 }
 
-//-----------------------------------------------
-// removeFirst
 template<typename T>
 bool_t CMyList<T>::removeFirst()
 {
@@ -206,8 +186,6 @@ bool_t CMyList<T>::removeFirst()
     return fResult;
 }
 
-//-----------------------------------------------
-// clear
 template<typename T>
 bool_t CMyList<T>::clear()
 {
@@ -217,7 +195,7 @@ bool_t CMyList<T>::clear()
     {
         try
         {
-            //delete elements from first to the last
+            // delete elements from first to last
             Node* toRem = m_pFirstItem;
             m_pFirstItem = m_pFirstItem->pNextItem;
             delete toRem;
@@ -232,8 +210,6 @@ bool_t CMyList<T>::clear()
     return fResult;
 }
 
-//-----------------------------------------------
-// getItems
 template<typename T>
 bool_t CMyList<T>::getItems(T *a_atItemsArray, uint64_t a_ui64Size)
 {

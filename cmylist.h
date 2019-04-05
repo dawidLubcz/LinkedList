@@ -8,41 +8,19 @@ template<class T>
 class CMyList
 {
 private:
-    /**
-     * class for contains value and pointer together
-     */
     class Node
     {
        public:
         T iValue;
         Node* pNextItem;
 
-        /**
-         * constructor
-         */
         explicit Node(T a_iValue);
-
-        /**
-         * copy constructor
-         */
         explicit Node(Node& a_oNode);
     };
 
-    /**
-     * Pointer to first node
-     */
     Node* m_pFirstItem;
-
-    /**
-     * Pointer to last node
-     */
     Node* m_pLastItem;
-
-    /**
-     * Number of nodes
-     */
     static uint64_t iItemsCounter;
-
 
 public:
     CMyList();
